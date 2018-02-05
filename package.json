@@ -1,0 +1,14 @@
+{
+  "name": "chrome-prometheus-formatter",
+  "version": "1.0.0",
+  "description": "Chrome Extension which makes plain Prometheus metrics easier to read.",
+  "scripts": {
+    "test": "standard js/*.js --fix",
+    "release": "cd extension && zip -r ../chrome-webstore-release.zip icons js LICENSE.txt manifest.json -x icons/.DS_Store js/.DS_Store .DS_Store"
+  },
+  "author": "Frederic Hemberger",
+  "license": "MIT",
+  "devDependencies": {
+    "standard": "^10.0.3"
+  }
+}
