@@ -63,7 +63,7 @@
     // 'version' part of the content type to verify.
     if (
       document.contentType !== 'text/plain' ||
-      !['/metrics', '/federate', '/probe'].includes(document.location.pathname)
+      !['/metrics', '/federate', '/probe', '/prometheus', '/actuator/prometheus'].includes(document.location.pathname)
     ) {
       return
     }
