@@ -1,6 +1,6 @@
 {
   "name": "chrome-prometheus-formatter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Chrome Extension which makes plain Prometheus metrics easier to read.",
   "scripts": {
     "test": "standard js/*.js --fix",
