@@ -2,7 +2,7 @@
 
 Chrome Extension which makes plain Prometheus metrics easier to read.
 
-This extension is a simple syntax highlighter for plain text Prometheus metrics. As it is hard to detect whether a plain text response is coming from Prometheus, it is currently limited to '/metrics', '/federate' and '/probe' paths.
+This extension is a simple syntax highlighter for plain text Prometheus metrics. As it is hard to detect whether a plain text response is coming from Prometheus, it is currently limited to '/metrics', '/federate', '/probe', '/prometheus' and '/actuator/prometheus' paths.
 
 ###### before:
 ![](_images/before.png)
