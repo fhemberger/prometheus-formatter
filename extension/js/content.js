@@ -57,17 +57,25 @@
     }
   })
 
-  function ready () {
+  function ready (data) {
     // Check if it is a Prometheus plain text response
     // This is quite a basic assumption, as the browser cannot access the
     // 'version' part of the content type to verify.
-    if (
-      document.contentType !== 'text/plain' ||
-      !['/metrics', '/federate', '/probe', '/prometheus', '/actuator/prometheus'].includes(document.location.pathname)
-    ) {
+    let paths = data.paths.length ? data.paths : []
+    
+    if (document.contentType !== 'text/plain') {
       return
     }
+    
+    for (var i = 0; i < paths.length; ++i) {
+      if (document.location.pathname.match(paths[i])) {
+        format()
+        break
+      }
+    }
+  }
 
+  function format() {
     // Check if plain text wrapped in <pre> element exists and doesn't exceed maxBodyLength
     const pre = document.body.querySelector('pre')
     const rawBody = pre && pre.innerText
@@ -84,5 +92,7 @@
     })
   }
 
-  document.addEventListener('DOMContentLoaded', ready, false)
+  document.addEventListener('DOMContentLoaded', function() {
+    chrome.storage.sync.get({paths: []}, ready);
+  });
 })()
