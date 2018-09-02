@@ -3,6 +3,14 @@
 (function () {
   'use strict'
 
+  const defaultPaths = [
+    '^/metrics',
+    '^/federate',
+    '^/probe',
+    '^/prometheus',
+    '^/actuator/prometheus'
+  ]
+
   // Listen for requests from content pages wanting to set up a port
   chrome.extension.onConnect.addListener(port => {
     if (port.name !== 'promformat') {
@@ -48,6 +56,15 @@
 
       // Disconnect
       port.disconnect()
+    })
+  })
+
+  // Set default paths on extension installation and update
+  chrome.runtime.onInstalled.addListener(() => {
+    chrome.storage.sync.get({ paths: [] }, data => {
+      if (!data.paths.length) {
+        chrome.storage.sync.set({ paths: defaultPaths })
+      }
     })
   })
 }())
