@@ -4,13 +4,13 @@
   'use strict'
 
   // Listen for requests from content pages wanting to set up a port
-  chrome.extension.onConnect.addListener(function (port) {
+  chrome.extension.onConnect.addListener(port => {
     if (port.name !== 'promformat') {
       console.error(`[Prometheus Formatter] unknown port name "${port.name}". Aborting.`)
       return
     }
 
-    port.onMessage.addListener(function (msg) {
+    port.onMessage.addListener(msg => {
       if (msg.name !== 'SENDING TEXT') {
         return
       }

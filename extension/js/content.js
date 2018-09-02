@@ -33,10 +33,10 @@
     .label-value { color: green }
     `)
 
-  const port = chrome.extension.connect({name: 'promformat'})
+  const port = chrome.extension.connect({ name: 'promformat' })
 
   // Add listener to receive response from BG when ready
-  port.onMessage.addListener(function (msg) {
+  port.onMessage.addListener(msg => {
     switch (msg.name) {
       case 'FORMATTED' :
         // Insert CSS
@@ -53,7 +53,7 @@
         break
 
       default :
-        throw new Error('Message not understood: ' + msg.name)
+        throw new Error(`Message not understood: ${msg.name}`)
     }
   })
 
@@ -62,11 +62,11 @@
     // This is quite a basic assumption, as the browser cannot access the
     // 'version' part of the content type to verify.
     let paths = data.paths.length ? data.paths : []
-    
+
     if (document.contentType !== 'text/plain') {
       return
     }
-    
+
     for (var i = 0; i < paths.length; ++i) {
       if (document.location.pathname.match(paths[i])) {
         format()
@@ -75,7 +75,7 @@
     }
   }
 
-  function format() {
+  function format () {
     // Check if plain text wrapped in <pre> element exists and doesn't exceed maxBodyLength
     const pre = document.body.querySelector('pre')
     const rawBody = pre && pre.innerText
@@ -92,7 +92,7 @@
     })
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    chrome.storage.sync.get({paths: []}, ready);
-  });
+  document.addEventListener('DOMContentLoaded', () => {
+    chrome.storage.sync.get({ paths: [] }, ready)
+  })
 })()
