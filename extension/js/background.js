@@ -36,7 +36,7 @@
           if (tmp && tmp.length > 1) {
             let { metric, tags, value } = tmp.groups
             if (tags) {
-              tags = tags.replace(/([^,]+?)="(.+?)"/g, '<span class="label-key">$1</span>="<span class="label-value">$2</span>"')
+              tags = tags.replace(/([^,]+?)="(.*?)"/g, '<span class="label-key">$1</span>="<span class="label-value">$2</span>"')
               tags = `{${tags}}`
             }
 
