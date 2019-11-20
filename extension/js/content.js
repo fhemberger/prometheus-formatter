@@ -1,4 +1,4 @@
-/* global chrome, console */
+/* global chrome */
 
 (function () {
   'use strict'
@@ -61,7 +61,7 @@
     // Check if it is a Prometheus plain text response
     // This is quite a basic assumption, as the browser cannot access the
     // 'version' part of the content type to verify.
-    let paths = data.paths.length ? data.paths : []
+    const paths = data.paths.length ? data.paths : []
 
     if (document.contentType !== 'text/plain') {
       return

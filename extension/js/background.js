@@ -23,7 +23,7 @@
         return
       }
 
-      let html = msg.payload
+      const html = msg.payload
         .split(/\r?\n/)
         .map(line => {
           // line is a comment
@@ -32,7 +32,7 @@
           }
 
           // line is a metric
-          let tmp = line.match(/^(?<metric>[\w_]+)(?:\{(?<tags>.*)\})?\x20(?<value>.+)/)
+          const tmp = line.match(/^(?<metric>[\w_]+)(?:\{(?<tags>.*)\})?\x20(?<value>.+)/)
           if (tmp && tmp.length > 1) {
             let { metric, tags, value } = tmp.groups
             if (tags) {
