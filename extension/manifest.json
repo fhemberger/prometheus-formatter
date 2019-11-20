@@ -1,28 +1,43 @@
 {
   "name": "Prometheus Formatter",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "manifest_version": 2,
   "description": "Makes plain Prometheus metrics easier to read.",
   "homepage_url": "https://github.com/fhemberger/chrome-prometheus-formatter",
   "minimum_chrome_version": "60",
   "icons": {
-    "128": "icons/128.png",
+    "32": "icons/32.png",
     "48": "icons/48.png",
-    "32": "icons/32.png"
+    "128": "icons/128.png"
   },
   "background": {
-    "scripts": ["js/background.js"]
+    "scripts": [
+      "js/background.js"
+    ]
   },
   "content_scripts": [
-    { "matches": ["<all_urls>"], "js": ["js/content.js"], "run_at": "document_start" }
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_start"
+    }
   ],
   "browser_action": {
     "default_popup": "html/popup.html",
     "default_icon": {
-      "128": "icons/128.png",
+      "32": "icons/32.png",
       "48": "icons/48.png",
-      "32": "icons/32.png"
+      "128": "icons/128.png"
     }
   },
-  "permissions":["*://*/*", "<all_urls>", "storage", "declarativeContent"]
+  "permissions": [
+    "*://*/*",
+    "<all_urls>",
+    "storage",
+    "declarativeContent"
+  ]
 }

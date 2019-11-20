@@ -4,7 +4,7 @@
   "description": "Chrome Extension which makes plain Prometheus metrics easier to read.",
   "scripts": {
     "test": "standard js/*.js --fix",
-    "release": "cd extension && zip -r ../chrome-webstore-release.zip html icons js LICENSE.txt manifest.json -x icons/.DS_Store js/.DS_Store .DS_Store"
+    "release": "node update-manifest.js && cd extension && zip -r ../chrome-webstore-release.zip html icons js LICENSE.txt manifest.json -x icons/.DS_Store js/.DS_Store .DS_Store"
   },
   "author": "Frederic Hemberger",
   "license": "MIT",
