@@ -1,6 +1,6 @@
 {
   "name": "Prometheus Formatter",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "manifest_version": 2,
   "description": "Makes plain Prometheus metrics easier to read.",
   "homepage_url": "https://github.com/fhemberger/chrome-prometheus-formatter",
@@ -35,8 +35,7 @@
     }
   },
   "permissions": [
-    "*://*/*",
-    "<all_urls>",
+    "activeTab",
     "storage",
     "declarativeContent"
   ]
