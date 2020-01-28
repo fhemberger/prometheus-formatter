@@ -12,7 +12,7 @@ pathsElement.addEventListener('keyup', element => {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-  chrome.storage.sync.get({ paths: [] }, data => {
-    pathsElement.value = data.paths.join('\n')
+  chrome.storage.sync.get({ paths: [] }, storedData => {
+    pathsElement.value = storedData.paths.join('\n')
   })
 })

@@ -33,7 +33,7 @@
     .label-value { color: green }
     `)
 
-  const port = chrome.extension.connect({ name: 'promformat' })
+  const port = chrome.runtime.connect({ name: 'promformat' })
 
   // Add listener to receive response from BG when ready
   port.onMessage.addListener(msg => {

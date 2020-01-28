@@ -3,7 +3,7 @@
   "version": "1.2.4",
   "manifest_version": 2,
   "description": "Makes plain Prometheus metrics easier to read.",
-  "homepage_url": "https://github.com/fhemberger/chrome-prometheus-formatter",
+  "homepage_url": "https://github.com/fhemberger/prometheus-formatter",
   "minimum_chrome_version": "60",
   "icons": {
     "32": "icons/32.png",
@@ -36,7 +36,12 @@
   },
   "permissions": [
     "activeTab",
-    "storage",
-    "declarativeContent"
-  ]
+    "storage"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "prometheus-formatter@frederic-hemberger.de",
+      "strict_min_version": "72.0"
+    }
+  }
 }

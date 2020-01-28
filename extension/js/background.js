@@ -12,7 +12,7 @@
   ]
 
   // Listen for requests from content pages wanting to set up a port
-  chrome.extension.onConnect.addListener(port => {
+  chrome.runtime.onConnect.addListener(port => {
     if (port.name !== 'promformat') {
       console.error(`[Prometheus Formatter] unknown port name "${port.name}". Aborting.`)
       return
@@ -32,9 +32,13 @@
           }
 
           // line is a metric
-          const tmp = line.match(/^(?<metric>[\w_]+)(?:\{(?<tags>.*)\})?\x20(?<value>.+)/)
+          // Named RegExp groups not supported by Firefox:
+          // https://bugzilla.mozilla.org/show_bug.cgi?id=1362154
+          // const tmp = line.match(/^(?<metric>[\w_]+)(?:\{(?<tags>.*)\})?\x20(?<value>.+)/)
+          const tmp = line.match(/^([\w_]+)(?:\{(.*)\})?\x20(.+)/)
+
           if (tmp && tmp.length > 1) {
-            let { metric, tags, value } = tmp.groups
+            let [ _, metric, tags, value ] = tmp
             if (tags) {
               tags = tags.replace(/([^,]+?)="(.*?)"/g, '<span class="label-key">$1</span>="<span class="label-value">$2</span>"')
               tags = `{${tags}}`
@@ -61,8 +65,8 @@
 
   // Set default paths on extension installation and update
   chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.sync.get({ paths: [] }, data => {
-      if (!data.paths.length) {
+    chrome.storage.sync.get({ paths: [] }, storedData => {
+      if (!storedData.paths.length) {
         chrome.storage.sync.set({ paths: defaultPaths })
       }
     })
