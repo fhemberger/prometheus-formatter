@@ -14,16 +14,22 @@ By default it works on URL paths matching '/metrics', '/federate', '/probe', '/p
 
 ## Installation
 
-**Option 1** – just install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail/prometheus-formatter/jhfbpphccndhifmpfbnpobpclhedckbb).
+**Option 1** – install it from the web store:
+* [Google Chrome](https://chrome.google.com/webstore/detail/prometheus-formatter/jhfbpphccndhifmpfbnpobpclhedckbb)
+* [Firefox](https://addons.mozilla.org/addon/prometheus-formatter/)
+
 
 **Option 2** – install it from source:
 
-* clone/download this repo,
-* open Chrome and go to `chrome://extensions/`,
-* enable "Developer mode",
-* click "Load unpacked extension",
-* select the `extension` folder in this repo.
-
+* Clone or download this repo
+* **Google Chrome** or **Microsoft Edge**:
+  * Go to `chrome://extensions/` respectively `edge://extensions/`,
+  * enable "Developer mode",
+  * click "Load unpacked extension",
+  * select the `extension` folder in this repo.
+* **Firefox**:
+  * Go to `about:addons`
+  * From the Cog-Menu on the right choose "Install Add-On From File …"
 
 ## License
 
