@@ -67,6 +67,15 @@ const renderFormattedHTML = (html) => {
     .label-key   { color: #4078F2 }
     .label-value { color: #50A14F }
     .comment     { color: #A0A1A7 }
+
+    @media (prefers-color-scheme:dark) {
+      body         { background-color: #282C34; color: #ABB2BF }
+      .metric      { color: #DE6A73 }
+      .value       { color: #C678DD }
+      .label-key   { color: #60AFEF }
+      .label-value { color: #98C379 }
+      .comment     { color: #5A616E }
+    }
     `
 
   // Insert CSS
