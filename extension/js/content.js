@@ -36,12 +36,17 @@ const sendBodyToFormatter = (storedData) => {
 }
 
 const renderFormattedHTML = (html) => {
+  const link = document.createElement('link');
+  link.href='https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap';
+  link.rel='stylesheet';
+  document.getElementsByTagName('head')[0].appendChild(link)
+
   const style = `
     pre {
       display:none
     }
     #promformat {
-      font-family: monospace;
+      font-family: 'Source Code Pro', monospace;
       word-wrap: break-word;
       white-space: pre-wrap;
     }
@@ -53,13 +58,15 @@ const renderFormattedHTML = (html) => {
       padding-top: 1em;
     }
     .comment + br + .comment {
-        padding-top: 0;
+      padding-top: 0;
     }
 
-    .metric      { color: #000 }
-    .value       { color: #ff20ed }
-    .label-key   { color: blue }
-    .label-value { color: green }
+    body         { background-color: #FAFAFA; color: #383A42 }
+    .metric      { color: #E45649 }
+    .value       { color: #A625A4 }
+    .label-key   { color: #4078F2 }
+    .label-value { color: #50A14F }
+    .comment     { color: #A0A1A7 }
     `
 
   // Insert CSS
