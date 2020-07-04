@@ -38,28 +38,38 @@ const sendBodyToFormatter = (storedData) => {
 const renderFormattedHTML = (html) => {
   const style = `
     pre {
-      display:none
+      display: none;
     }
     #promformat {
-      font-family: monospace;
+      font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
       word-wrap: break-word;
       white-space: pre-wrap;
     }
     .comment {
-      color: #6a737d;
       display: inline-block;
     }
     br + .comment {
       padding-top: 1em;
     }
     .comment + br + .comment {
-        padding-top: 0;
+      padding-top: 0;
     }
 
-    .metric      { color: #000 }
-    .value       { color: #ff20ed }
-    .label-key   { color: blue }
-    .label-value { color: green }
+    body         { background-color: #fff; color: #000 }
+    .metric      { color: #de3121 }
+    .value       { color: #a625a4 }
+    .label-key   { color: #2d6bf0 }
+    .label-value { color: #418240 }
+    .comment     { color: #73747d }
+
+    @media (prefers-color-scheme:dark) {
+      body         { background-color: #1d2025; color: #fff }
+      .metric      { color: #de6a73 }
+      .value       { color: #98c379 }
+      .label-key   { color: #60afef }
+      .label-value { color: #98c379 }
+      .comment     { color: #9297a0 }
+    }
     `
 
   // Insert CSS
