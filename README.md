@@ -5,11 +5,13 @@ Browser extension which makes plain Prometheus metrics easier to read.
 This extension is a simple syntax highlighter for plain text Prometheus metrics. 
 By default it works on URL paths matching '/metrics', '/federate', '/probe', '/prometheus' and '/actuator/prometheus'. By clicking on the extension's icon, you can define your own paths (Regular Expressions are suppported), which will override the default list.
 
-###### before:
+###### Before:
 ![](_images/before.png)
 
-###### after:
+###### After:
 ![](_images/after.png)
+
+For highlighting in the terminal: [promcolor](https://github.com/fhemberger/promcolor).
 
 
 ## Installation
