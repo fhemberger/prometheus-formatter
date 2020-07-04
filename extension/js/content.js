@@ -36,22 +36,16 @@ const sendBodyToFormatter = (storedData) => {
 }
 
 const renderFormattedHTML = (html) => {
-  const link = document.createElement('link');
-  link.href='https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap';
-  link.rel='stylesheet';
-  document.getElementsByTagName('head')[0].appendChild(link)
-
   const style = `
     pre {
-      display:none
+      display: none;
     }
     #promformat {
-      font-family: 'Source Code Pro', monospace;
+      font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
       word-wrap: break-word;
       white-space: pre-wrap;
     }
     .comment {
-      color: #6a737d;
       display: inline-block;
     }
     br + .comment {
@@ -61,20 +55,20 @@ const renderFormattedHTML = (html) => {
       padding-top: 0;
     }
 
-    body         { background-color: #FAFAFA; color: #383A42 }
-    .metric      { color: #E45649 }
-    .value       { color: #A625A4 }
-    .label-key   { color: #4078F2 }
-    .label-value { color: #50A14F }
-    .comment     { color: #A0A1A7 }
+    body         { background-color: #fff; color: #000 }
+    .metric      { color: #de3121 }
+    .value       { color: #a625a4 }
+    .label-key   { color: #2d6bf0 }
+    .label-value { color: #418240 }
+    .comment     { color: #73747d }
 
     @media (prefers-color-scheme:dark) {
-      body         { background-color: #282C34; color: #ABB2BF }
-      .metric      { color: #DE6A73 }
-      .value       { color: #C678DD }
-      .label-key   { color: #60AFEF }
-      .label-value { color: #98C379 }
-      .comment     { color: #5A616E }
+      body         { background-color: #1d2025; color: #fff }
+      .metric      { color: #de6a73 }
+      .value       { color: #98c379 }
+      .label-key   { color: #60afef }
+      .label-value { color: #98c379 }
+      .comment     { color: #9297a0 }
     }
     `
 
