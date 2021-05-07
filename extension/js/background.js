@@ -23,7 +23,7 @@ const formatPrometheusMetrics = (body) => body
     const tmp = line.match(/^([\w_]+)(?:\{(.*)\})?\x20(.+)/)
 
     if (tmp && tmp.length > 1) {
-      let [ _, metric, tags, value ] = tmp
+      let [_, metric, tags, value] = tmp // eslint-disable-line no-unused-vars
       if (tags) {
         tags = tags.replace(/([^,]+?)="(.*?)"/g, '<span class="label-key">$1</span>="<span class="label-value">$2</span>"')
         tags = `{${tags}}`
