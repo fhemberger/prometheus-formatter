@@ -13,7 +13,6 @@
 
     body {
       font-family: sans-serif;
-      height: 250px;
       width: 350px;
       outline: none;
       font-size: 100%;
@@ -27,19 +26,27 @@
 
     textarea {
       width: 100%;
-      height: 70%;
+      min-height: 10rem;
       font-size: inherit;
     }
 
     p {
       font-size: 85%;
+      line-height: 1.3;
+    }
+
+    p code {
+      font-size: inherit;
+      padding: .2em .4em;
+      background: #f0f0f0;
+      border-radius: 0.2em;
     }
   </style>
 </head>
 <body>
   <h1>Paths treated as Prometheus endpoints</h1>
   <textarea id="paths-to-handle"></textarea>
-  <p>Separate paths by new line. Regular Expressions are supported, e.g.: ^/prometheus</p>
+  <p>Documents with encoding <code>text/plain</code> matching these paths will be highlighted. Separate paths by new line. Regular Expressions are supported, e.g.: <code>^/prometheus</code>.</p>
   <script src="../js/popup.js"></script>
 </body>
 </html>

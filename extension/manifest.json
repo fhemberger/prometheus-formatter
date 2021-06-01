@@ -1,8 +1,8 @@
 {
   "name": "Prometheus Formatter",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "manifest_version": 2,
-  "description": "Makes plain Prometheus metrics easier to read.",
+  "description": "Makes plain Prometheus/OpenMetrics endpoints easier to read.",
   "homepage_url": "https://github.com/fhemberger/prometheus-formatter",
   "minimum_chrome_version": "60",
   "icons": {

@@ -3,17 +3,23 @@
 // Don't process HTTP response bodies over 30MB
 const MAX_BODY_SIZE_BYTES = 30 * 1024 * 1024
 
-const sendBodyToFormatter = (storedData) => {
-  // Check if it is a Prometheus plain text response
-  // This is quite a basic assumption, as the browser cannot access the
-  // 'version' part of the content type to verify.
-  if (document.contentType !== 'text/plain') {
-    port.disconnect()
-    return
-  }
+// OpenMetrics endpoints have a dedicated HTTP content-type, but Prometheus
+// sends a plain-text response. Parsing all text/plain types is a too broad
+// assumption, and the browser cannot access the 'version' part of the
+// content-type to verify it's actually a Prometheus endpoint. Some exporters
+// might not even include the version string. Thus, for text/plain responses,
+// the current page's path *must* be contained in the allow list.
+const isValidEndpoint = (allowedPaths) => {
+  if (document.contentType === 'application/openmetrics-text') { return true }
+  if (
+    document.contentType === 'text/plain' &&
+    allowedPaths.some(path => document.location.pathname.match(path))
+  ) { return true }
+  return false
+}
 
-  // Check if the current page's paths matches one of our whitelist
-  if (!storedData.paths.some(path => document.location.pathname.match(path))) {
+const sendBodyToFormatter = (storedData) => {
+  if (!isValidEndpoint(storedData.paths)) {
     port.disconnect()
     return
   }

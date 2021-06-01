@@ -1,9 +1,9 @@
 # Prometheus Formatter
 
-Browser extension which makes plain Prometheus metrics easier to read.
+Browser extension which makes plain Prometheus/OpenMetrics output easier to read.
 
-This extension is a simple syntax highlighter for plain text Prometheus metrics. 
-By default it works on URL paths matching '/metrics', '/federate', '/probe', '/prometheus' and '/actuator/prometheus'. By clicking on the extension's icon, you can define your own paths (Regular Expressions are suppported), which will override the default list.
+This extension is a simple syntax highlighter for Prometheus and OpenMetrics formats. For the highlighting to work, metric endpoints **must** use either HTTP Content-Type [`application/openmetrics-text`](https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md#overall-structure) or [text/plain](https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format). 
+For plain-text metrics, parsing is limited by default on URL paths matching '/metrics', '/federate', '/probe', '/prometheus' and '/actuator/prometheus'. By clicking on the extension's icon, you can define your own paths (Regular Expressions are suppported), which will override the default list.
 
 ###### Before:
 ![](_images/before.png)

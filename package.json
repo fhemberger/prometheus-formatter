@@ -1,7 +1,7 @@
 {
   "name": "prometheus-formatter",
-  "version": "2.1.0",
-  "description": "Browser extension which makes plain Prometheus metrics easier to read.",
+  "version": "2.2.0",
+  "description": "Browser extension which makes plain Prometheus/OpenMetrics endpoints easier to read.",
   "scripts": {
     "test": "standard js/*.js --fix",
     "release": "./package/package.sh"
