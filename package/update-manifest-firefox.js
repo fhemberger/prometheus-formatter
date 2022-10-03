@@ -6,11 +6,19 @@ const manifestPath = path.join(__dirname, '..', 'extension-firefox', 'manifest.j
 const manifest = require(manifestPath)
 
 // Firefox needs additional keys in the manifest.json which are not allowed in Chrome
+// https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Browser_compatibility_for_manifest.json
 manifest.browser_specific_settings = {
   gecko: {
     id: 'prometheus-formatter@frederic-hemberger.de',
-    strict_min_version: '72.0'
+    strict_min_version: '101.0'
   }
 }
+
+// Firefox will migrate from background scripts to Service Workers later
+manifest.background.scripts = [
+  "js/background.js"
+]
+
+delete manifest.background.service_worker;
 
 fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf8')
