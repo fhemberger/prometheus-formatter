@@ -42,7 +42,9 @@ const sendBodyToFormatter = (storedData) => {
 }
 
 const renderFormattedHTML = (html) => {
-  const style = `
+  const d = new DOMParser()
+
+  const css = `
     pre {
       display: none;
     }
@@ -79,16 +81,14 @@ const renderFormattedHTML = (html) => {
     `
 
   // Insert CSS
-  const promformatStyle = document.createElement('style')
-  document.head.appendChild(promformatStyle)
-  promformatStyle.insertAdjacentHTML('beforeend', style)
+  const style = document.createElement('style')
+  document.head.appendChild(style)
+  style.innerText = css
 
   // Insert HTML content
-  const promformatContent = document.createElement('div')
-  promformatContent.id = 'promformat'
-  document.body.appendChild(promformatContent)
-
-  promformatContent.innerHTML = html
+  const doc = d.parseFromString(html, 'text/html')
+  document.body = doc.body
+  document.body.id = 'promformat'
 }
 
 const port = chrome.runtime.connect({ name: 'promformat' })

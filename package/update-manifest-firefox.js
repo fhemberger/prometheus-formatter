@@ -10,7 +10,7 @@ const manifest = require(manifestPath)
 manifest.browser_specific_settings = {
   gecko: {
     id: 'prometheus-formatter@frederic-hemberger.de',
-    strict_min_version: '101.0'
+    strict_min_version: '109.0'
   }
 }
 
