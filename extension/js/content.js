@@ -45,39 +45,84 @@ const renderFormattedHTML = (html) => {
   const d = new DOMParser()
 
   const css = `
+    :root {
+      --bg: #fff;
+      --fg: #000;
+
+      /* https://github.com/atom/atom/blob/master/packages/one-light-syntax/styles/colors.less */
+
+      /* Monochrome ------------------------------- */
+      --mono-1: #383a42;
+      --mono-2: #696c77;
+      --mono-3: #a0a1a7;
+
+      /* Colors ----------------------------------- */
+      --cyan: #0184bc;
+      --blue: #4078f2;
+      --purple: #a626a4;
+      --green: #50a14f;
+
+      --red-1: #e45649;
+      --red-2: #ca1243;
+
+      --orange-1: #b76b01;
+      --orange-1: #cb7701;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1d2025;
+        --fg: #fff;
+
+        /* https://github.com/atom/atom/blob/master/packages/one-dark-syntax/styles/colors.less */
+
+        /* Monochrome ----------------------------- */
+        --mono-1: #abb2bf;
+        --mono-2: #828997;
+        --mono-3: #5c6370;
+
+        /* Colors --------------------------------- */
+        --cyan: #56b6c2;
+        --blue: #61afef;
+        --purple: #c678dd;
+        --green: #98c379;
+
+        --red-1: #e06c75;
+        --red-2: #be5046;
+
+        --orange-1: #d19a66;
+        --orange-2: #e5c07b;
+      }
+    }
+
     pre {
       display: none;
     }
+
     #promformat {
       font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
       word-wrap: break-word;
       white-space: pre-wrap;
     }
+
     .comment {
       display: inline-block;
     }
+
     br + .comment {
       padding-top: 1em;
     }
+
     .comment + br + .comment {
       padding-top: 0;
     }
 
-    body         { background-color: #fff; color: #000 }
-    .metric      { color: #de3121 }
-    .value       { color: #a625a4 }
-    .label-key   { color: #2d6bf0 }
-    .label-value { color: #418240 }
-    .comment     { color: #73747d }
-
-    @media (prefers-color-scheme:dark) {
-      body         { background-color: #1d2025; color: #fff }
-      .metric      { color: #de6a73 }
-      .value       { color: #98c379 }
-      .label-key   { color: #60afef }
-      .label-value { color: #98c379 }
-      .comment     { color: #9297a0 }
-    }
+    body         { background-color: var(--bg); color: var(--fg) }
+    .metric      { color: var(--red-1) }
+    .value       { color: var(--purple) }
+    .label-key   { color: var(--blue) }
+    .label-value { color: var(--green) }
+    .comment     { color: var(--mono-2) }
     `
 
   // Insert CSS
