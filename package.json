@@ -1,16 +1,16 @@
 {
   "name": "prometheus-formatter",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Browser extension which makes plain Prometheus/OpenMetrics endpoints easier to read.",
   "scripts": {
     "test": "standard --fix",
     "release": "./package/package.sh",
-    "lint-firefox": "npm run package && npx addons-linter --min-manifest-version=3 --max-manifest-version=3 extension-firefox"
+    "lint-firefox": "npm run release && npx addons-linter --min-manifest-version=3 --max-manifest-version=3 extension-firefox"
   },
   "author": "Frederic Hemberger",
   "license": "MIT",
   "devDependencies": {
-    "addons-linter": "5.23.0",
+    "addons-linter": "5.28.0",
     "standard": "17.0.0"
   }
 }
