@@ -128,7 +128,7 @@ const renderFormattedHTML = (html) => {
   // Insert CSS
   const style = document.createElement('style')
   document.head.appendChild(style)
-  style.innerText = css
+  style.textContent = css
 
   // Insert HTML content
   const doc = d.parseFromString(html, 'text/html')
