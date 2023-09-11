@@ -8,34 +8,51 @@ const defaultPaths = [
   '^/actuator/prometheus'
 ]
 
-const formatPrometheusMetrics = (body) => body
-  .split(/\r?\n/)
-  .map(line => {
-    // line is a comment
-    if (/^#/.test(line)) {
-      return `<span class="comment">${line}</span>`
-    }
+// https://adrianroselli.com/2022/12/brief-note-on-description-list-support.html
+const formatPrometheusMetrics = (body) => {
+  let previousMetricName = ''
+  return body
+    .split(/\r?\n/)
+    .map(line => {
+      let tmp
 
-    // line is a metric
-    // Named RegExp groups not supported by Firefox:
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=1362154
-    // const tmp = line.match(/^(?<metric>[\w_]+)(?:\{(?<tags>.*)\})?\x20(?<value>.+)/)
-    const tmp = line.match(/^([\w_]+)(?:\{(.*)\})?\x20(.+)/)
+      // line is a comment
+      tmp = line.match(/^# (?:HELP|TYPE) ([^ ]+)/)
+      if (tmp && tmp.length > 1) {
+        let metricName = tmp[1]
 
-    if (tmp && tmp.length > 1) {
-      let [_, metric, tags, value] = tmp // eslint-disable-line no-unused-vars
-      if (tags) {
-        tags = tags.replace(/([^,]+?)="(.*?)"/g, '<span class="label-key">$1</span>="<span class="label-value">$2</span>"')
-        tags = `{${tags}}`
+        // First comment, don't render closing </section>
+        if (previousMetricName == '') {
+          previousMetricName = metricName
+          return `<section aria-label="${metricName}">\n<span class="comment">${line}</span>`
+        }
+
+        if (metricName != previousMetricName) {
+          previousMetricName = metricName
+          return `</section>\n<section aria-label="${metricName}">\n<span class="comment">${line}</span>`
+        }
+
+        return `<span class="comment">${line}</span>`
       }
 
-      return `<span class="metric">${metric}</span>${tags || ''} <span class="value">${value}</span>`
-    }
+      // line is a metric
+      tmp = line.match(/^([\w_]+)(?:\{(.*)\})?\x20(.+)/)
+      if (tmp && tmp.length > 1) {
+        let [_, metricName, labels, value] = tmp // eslint-disable-line no-unused-vars
 
-    // line is something else, do nothing
-    return line
-  })
-  .join('<br>')
+        if (labels) {
+          labels = labels.replace(/([^,]+?)="(.*?)",?/g, '<dt class="label-key" role="associationlistitemkey">$1</dt><dd class="label-value" role="associationlistitemvalue">$2</dd>')
+          labels = `<dl class="labels" role="associationlist">${labels}</dl>`
+        }
+
+        return `<span class="metric-name">${metricName}</span>${labels || ''} <span class="value">${value}</span>`
+      }
+
+      // line is something else, do nothing
+      return line
+    })
+    .join('<br>') + '</section>'
+  }
 
 // Listen for requests from content pages wanting to set up a port
 chrome.runtime.onConnect.addListener(port => {

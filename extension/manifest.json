@@ -1,6 +1,6 @@
 {
   "name": "Prometheus Formatter",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "manifest_version": 3,
   "description": "Makes plain Prometheus/OpenMetrics endpoints easier to read.",
   "homepage_url": "https://github.com/fhemberger/prometheus-formatter",

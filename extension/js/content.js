@@ -102,23 +102,31 @@ const renderFormattedHTML = (html) => {
     #promformat {
       font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
       word-wrap: break-word;
-      white-space: pre-wrap;
     }
 
     .comment {
       display: inline-block;
     }
 
-    br + .comment {
-      padding-top: 1em;
+    section {
+      padding-block-end: 1.5em;
     }
 
-    .comment + br + .comment {
-      padding-top: 0;
+    dl,dt,dd {
+      display: initial;
+      padding: initial;
+      margin: initial;
     }
 
+    .labels::before                { color: var(--fg); content: '{' }
+    .labels::after                 { color: var(--fg); content: '}' }
+    .label-key::after              { color: var(--fg); content: '="' }
+    .label-value::after            { color: var(--fg); content: '",' }
+    .label-value:last-child::after { content: '"' }
+
+    html         { color-scheme: light dark }
     body         { background-color: var(--bg); color: var(--fg) }
-    .metric      { color: var(--red-1) }
+    .metric-name { color: var(--red-1) }
     .value       { color: var(--purple) }
     .label-key   { color: var(--blue) }
     .label-value { color: var(--green) }
@@ -132,6 +140,8 @@ const renderFormattedHTML = (html) => {
 
   // Insert HTML content
   const doc = d.parseFromString(html, 'text/html')
+  document.documentElement.lang = 'en'
+  document.title = 'Prometheus metrics'
   document.body = doc.body
   document.body.id = 'promformat'
 }
