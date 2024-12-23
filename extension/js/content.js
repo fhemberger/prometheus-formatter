@@ -66,7 +66,7 @@ const renderFormattedHTML = (html) => {
       --red-2: #ca1243;
 
       --orange-1: #b76b01;
-      --orange-1: #cb7701;
+      --orange-2: #cb7701;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -131,6 +131,10 @@ const renderFormattedHTML = (html) => {
     .label-key   { color: var(--blue) }
     .label-value { color: var(--green) }
     .comment     { color: var(--mono-2) }
+
+    .exemplar              { color: var(--mono-2) }
+    .exemplar .label-key   { color: var(--orange-1) }
+    .exemplar .label-value { color: var(--orange-2) }
     `
 
   // Insert CSS

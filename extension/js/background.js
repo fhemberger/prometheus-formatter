@@ -36,16 +36,24 @@ const formatPrometheusMetrics = (body) => {
       }
 
       // line is a metric
-      tmp = line.match(/^([\w_]+)(?:\{(.*)\})?\x20(.+)/)
+      tmp = line.match(/^(?<metric_name>[\w_]+)(?:\{(?<metric_labels>.*?)\})?\x20(?<metric_value>[^\s]+)(?<exemplar>\x20?#\x20?(?:\{(?<exemplar_labels>.*?)\})?\x20(?<exemplar_value>(.+)))?/)
       if (tmp && tmp.length > 1) {
-        let [_, metricName, labels, value] = tmp // eslint-disable-line no-unused-vars
-
-        if (labels) {
-          labels = labels.replace(/([^,]+?)="(.*?)",?/g, '<dt class="label-key" role="associationlistitemkey">$1</dt><dd class="label-value" role="associationlistitemvalue">$2</dd>')
-          labels = `<dl class="labels" role="associationlist">${labels}</dl>`
+        if (tmp.groups.metric_labels) {
+          tmp.groups.metric_labels = tmp.groups.metric_labels.replace(/([^,]+?)="(.*?)",?/g, '<dt class="label-key" role="associationlistitemkey">$1</dt><dd class="label-value" role="associationlistitemvalue">$2</dd>')
+          tmp.groups.metric_labels = `<dl class="labels" role="associationlist">${tmp.groups.metric_labels}</dl>`
         }
 
-        return `<span class="metric-name">${metricName}</span>${labels || ''} <span class="value">${value}</span>`
+        let exemplar = ''
+        if (tmp.groups.exemplar) {
+          if (tmp.groups.exemplar_labels) {
+            tmp.groups.exemplar_labels = tmp.groups.exemplar_labels.replace(/([^,]+?)="(.*?)",?/g, '<dt class="label-key" role="associationlistitemkey">$1</dt><dd class="label-value" role="associationlistitemvalue">$2</dd>')
+            tmp.groups.exemplar_labels = `<dl class="labels" role="associationlist">${tmp.groups.exemplar_labels}</dl>`
+          }
+
+          exemplar = `<span class="exemplar aria-label="Exemplar"> <span aria-hidden="true">#</span> ${tmp.groups.exemplar_labels || ''} ${tmp.groups.exemplar_value}</span>`
+        }
+
+        return `<span class="metric-name">${tmp.groups.metric_name}</span>${tmp.groups.metric_labels || ''} <span class="value">${tmp.groups.metric_value}</span>${exemplar}`
       }
 
       // line is something else, do nothing
