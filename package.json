@@ -1,6 +1,6 @@
 {
   "name": "prometheus-formatter",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Browser extension which makes plain Prometheus/OpenMetrics endpoints easier to read.",
   "scripts": {
     "test": "standard --fix",
@@ -10,7 +10,7 @@
   "author": "Frederic Hemberger",
   "license": "MIT",
   "devDependencies": {
-    "addons-linter": "^6.15.0",
-    "standard": "^17.1.0"
+    "addons-linter": "^7.7.0",
+    "standard": "^17.1.2"
   }
 }

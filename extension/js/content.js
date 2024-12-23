@@ -1,4 +1,4 @@
-/* global chrome */
+/* global chrome, DOMParser */
 
 // Don't process HTTP response bodies over 30MB
 const MAX_BODY_SIZE_BYTES = 30 * 1024 * 1024

@@ -16,9 +16,9 @@ manifest.browser_specific_settings = {
 
 // Firefox will migrate from background scripts to Service Workers later
 manifest.background.scripts = [
-  "js/background.js"
+  'js/background.js'
 ]
 
-delete manifest.background.service_worker;
+delete manifest.background.service_worker
 
 fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf8')

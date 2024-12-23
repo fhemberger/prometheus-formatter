@@ -19,15 +19,15 @@ const formatPrometheusMetrics = (body) => {
       // line is a comment
       tmp = line.match(/^# (?:HELP|TYPE) ([^ ]+)/)
       if (tmp && tmp.length > 1) {
-        let metricName = tmp[1]
+        const metricName = tmp[1]
 
         // First comment, don't render closing </section>
-        if (previousMetricName == '') {
+        if (previousMetricName === '') {
           previousMetricName = metricName
           return `<section aria-label="${metricName}">\n<span class="comment">${line}</span>`
         }
 
-        if (metricName != previousMetricName) {
+        if (metricName !== previousMetricName) {
           previousMetricName = metricName
           return `</section>\n<section aria-label="${metricName}">\n<span class="comment">${line}</span>`
         }
@@ -60,7 +60,7 @@ const formatPrometheusMetrics = (body) => {
       return line
     })
     .join('<br>') + '</section>'
-  }
+}
 
 // Listen for requests from content pages wanting to set up a port
 chrome.runtime.onConnect.addListener(port => {
