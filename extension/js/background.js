@@ -39,15 +39,15 @@ const formatPrometheusMetrics = (body) => {
       tmp = line.match(/^(?<metric_name>[\w_]+)(?:\{(?<metric_labels>.*?)\})?\x20(?<metric_value>[^\s]+)(?<exemplar>\x20?#\x20?(?:\{(?<exemplar_labels>.*?)\})?\x20(?<exemplar_value>(.+)))?/)
       if (tmp && tmp.length > 1) {
         if (tmp.groups.metric_labels) {
-          tmp.groups.metric_labels = tmp.groups.metric_labels.replace(/([^,]+?)="(.*?)",?/g, '<dt class="label-key" role="associationlistitemkey">$1</dt><dd class="label-value" role="associationlistitemvalue">$2</dd>')
-          tmp.groups.metric_labels = `<dl class="labels" role="associationlist">${tmp.groups.metric_labels}</dl>`
+          tmp.groups.metric_labels = tmp.groups.metric_labels.replace(/(?<label_key>[^,]+?)="(?<label_value>.*?)"(?<separator>,?)/g, '<span class="label-key">$<label_key></span><span aria-hidden="true">="</span><span class="label-value">$<label_value></span><span aria-hidden="true">"$<separator></span>')
+          tmp.groups.metric_labels = `<span class="labels"><span aria-hidden="true">{</span>${tmp.groups.metric_labels}<span aria-hidden="true">}</span></span>`
         }
 
         let exemplar = ''
         if (tmp.groups.exemplar) {
           if (tmp.groups.exemplar_labels) {
-            tmp.groups.exemplar_labels = tmp.groups.exemplar_labels.replace(/([^,]+?)="(.*?)",?/g, '<dt class="label-key" role="associationlistitemkey">$1</dt><dd class="label-value" role="associationlistitemvalue">$2</dd>')
-            tmp.groups.exemplar_labels = `<dl class="labels" role="associationlist">${tmp.groups.exemplar_labels}</dl>`
+            tmp.groups.exemplar_labels = tmp.groups.exemplar_labels.replace(/(?<label_key>[^,]+?)="(?<label_value>.*?)"(?<separator>,?)/g, '<span class="label-key">$<label_key></span><span aria-hidden="true">="</span><span class="label-value">$<label_value></span><span aria-hidden="true">"$<separator></span>')
+            tmp.groups.exemplar_labels = `<span class="labels">${tmp.groups.exemplar_labels}</span>`
           }
 
           exemplar = `<span class="exemplar aria-label="Exemplar"> <span aria-hidden="true">#</span> ${tmp.groups.exemplar_labels || ''} ${tmp.groups.exemplar_value}</span>`

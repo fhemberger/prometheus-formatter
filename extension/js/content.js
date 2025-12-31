@@ -118,12 +118,6 @@ const renderFormattedHTML = (html) => {
       margin: initial;
     }
 
-    .labels::before                { color: var(--fg); content: '{' }
-    .labels::after                 { color: var(--fg); content: '}' }
-    .label-key::after              { color: var(--fg); content: '="' }
-    .label-value::after            { color: var(--fg); content: '",' }
-    .label-value:last-child::after { content: '"' }
-
     html         { color-scheme: light dark }
     body         { background-color: var(--bg); color: var(--fg) }
     .metric-name { color: var(--red-1) }
