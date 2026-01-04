@@ -10,7 +10,11 @@ const manifest = require(manifestPath)
 manifest.browser_specific_settings = {
   gecko: {
     id: 'prometheus-formatter@frederic-hemberger.de',
-    strict_min_version: '109.0'
+    strict_min_version: '142.0',
+    // https://extensionworkshop.com/documentation/develop/firefox-builtin-data-consent/
+    data_collection_permissions: {
+      required: ['none']
+    }
   }
 }
 
