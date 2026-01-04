@@ -39,6 +39,12 @@ const formatPrometheusMetrics = (body) => {
       tmp = line.match(/^(?<metric_name>[\w_]+)(?:\{(?<metric_labels>.*?)\})?\x20(?<metric_value>[^\s]+)(?<exemplar>\x20?#\x20?(?:\{(?<exemplar_labels>.*?)\})?\x20(?<exemplar_value>(.+)))?/)
       if (tmp && tmp.length > 1) {
         if (tmp.groups.metric_labels) {
+          // C3P0 (https://github.com/swaldman/c3p0), a JDBC Connection pooling library has a strange way to serialize label values, e.g.:
+          // com_mchange_v2_c3p0_acquireIncrement{_objectname="com.mchange.v2.c3p0<type=PooledDataSource[akbmhibf1zw2c6fyjljn|241589de]><>acquireIncrement",type="PooledDataSource"} 20.0
+          //
+          // See: https://github.com/fhemberger/prometheus-formatter/issues/23
+          tmp.groups.metric_labels = tmp.groups.metric_labels.replace('<', '&lt;').replace('>', '&gt;')
+
           tmp.groups.metric_labels = tmp.groups.metric_labels.replace(/(?<label_key>[^,]+?)="(?<label_value>.*?)"(?<separator>,?)/g, '<span class="label-key">$<label_key></span><span aria-hidden="true">="</span><span class="label-value">$<label_value></span><span aria-hidden="true">"$<separator></span>')
           tmp.groups.metric_labels = `<span class="labels"><span aria-hidden="true">{</span>${tmp.groups.metric_labels}<span aria-hidden="true">}</span></span>`
         }
